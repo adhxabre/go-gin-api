@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  mysql:
+    hostname: mysql
+    image: mysql:latest
+    ports:
+      - ${DB_PORT}:3306
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    networks:
+      - app-network
+
+  app:
+    hostname: app
+    container_name: qti_be_dev_test
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${PORT}:${PORT}
+    restart: always
+    volumes:
+      - ./:/app
+    depends_on:
+      - mysql
+    env_file: .env
+    networks:
+      - app-network
+
+volumes:
+  app_vol:
+
+networks:
+  app_network:
+    driver: bridge
