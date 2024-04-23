@@ -15,5 +15,6 @@ type UpdateEmailRequest struct {
 }
 
 type UpdatePasswordRequest struct {
-	Password string `json:"password" form:"password" validate:"required"`
+	OldPassword string `json:"old_password" form:"old_password" validate:"required"`
+	NewPassword string `json:"new_password" form:"new_password" validate:"required"`
 }
