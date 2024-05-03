@@ -18,7 +18,7 @@ func main() {
 
 	PORT := os.Getenv("PORT")
 
-	gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.DebugMode)
 	r := gin.Default()
 
 	database.DBConn()
